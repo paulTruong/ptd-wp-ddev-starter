@@ -1,0 +1,77 @@
+#ddev-generated
+# If you remove the ddev-generated line above you
+# are responsible for maintaining this file. DDEV will not then
+# update it, for example if you add `additional_hostnames`, etc.
+
+http:
+  routers:
+    lando-odm-core-web-80-http:
+      entrypoints:
+        - http-80
+      rule: HostRegexp(`^lando-odm-core\.ddev\.site$`)
+      
+      service: "lando-odm-core-web-80"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "lando-odm-core-redirectHttps"
+    lando-odm-core-web-8025-http:
+      entrypoints:
+        - http-8025
+      rule: HostRegexp(`^lando-odm-core\.ddev\.site$`)
+      
+      service: "lando-odm-core-web-8025"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "lando-odm-core-redirectHttps"
+    
+    
+    
+    lando-odm-core-web-80-https:
+      entrypoints:
+        - http-443
+      rule: HostRegexp(`^lando-odm-core\.ddev\.site$`)
+      
+      service: "lando-odm-core-web-80"
+      ruleSyntax: v3
+      
+      tls: true
+      
+    lando-odm-core-web-8025-https:
+      entrypoints:
+        - http-8026
+      rule: HostRegexp(`^lando-odm-core\.ddev\.site$`)
+      
+      service: "lando-odm-core-web-8025"
+      ruleSyntax: v3
+      
+      tls: true
+      
+    
+
+  middlewares:
+    lando-odm-core-redirectHttps:
+      redirectScheme:
+        scheme: https
+        permanent: true
+
+  services:
+    lando-odm-core-web-80:
+      loadbalancer:
+        servers:
+          - url: http://ddev-lando-odm-core-web:80
+        
+    lando-odm-core-web-8025:
+      loadbalancer:
+        servers:
+          - url: http://ddev-lando-odm-core-web:8025
+        
+    
+    
+    
+
+tls:
+  certificates:
+    - certFile: /mnt/ddev-global-cache/traefik/certs/lando-odm-core.crt
+      keyFile: /mnt/ddev-global-cache/traefik/certs/lando-odm-core.key
