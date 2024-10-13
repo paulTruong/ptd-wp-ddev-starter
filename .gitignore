@@ -95,10 +95,8 @@ config/*.env
 # add your own entries here
 !wp-content/mu-plugins/example-mu-plugin/
 !wp-content/plugins/ptd-starter-plugin/
-!wp-content/plugins/ptd-starter-plugin/*
 !wp-content/themes/ptd-starter-theme/
 !wp-config-local.php
-
 
 # large/disallowed file types
 # a CDN should be used for these
