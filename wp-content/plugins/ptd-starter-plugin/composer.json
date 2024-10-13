@@ -1,0 +1,17 @@
+{
+    "name": "ptd/ptd-starter-plugin",
+    "description": "Start WordPress Plugin",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "ptdStarter\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Paul Truong",
+            "email": "paul@paultruong.dev"
+        }
+    ],
+    "require": {}
+}
