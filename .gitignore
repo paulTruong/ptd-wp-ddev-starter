@@ -82,6 +82,10 @@ config/*.env
 # track these mu-plugins, plugins, and themes
 # add your own entries here
 !/wp-content/plugins/ptd-starter-plugin/
+!/wp-content/plugins/wp-migrate-db-pro/
+!/wp-content/plugins/gp-premium/
+!/wp-content/plugins/generateblocks-pro/
+
 !/wp-content/themes/ptd-starter-theme/
 
 # large/disallowed file types
