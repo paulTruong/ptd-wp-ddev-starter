@@ -87,6 +87,7 @@ config/*.env
 !/wp-content/plugins/generateblocks-pro/
 
 !/wp-content/themes/ptd-starter-theme/
+!/wp-content/themes/ptd-gp-starter-theme/
 
 # large/disallowed file types
 # a CDN should be used for these
