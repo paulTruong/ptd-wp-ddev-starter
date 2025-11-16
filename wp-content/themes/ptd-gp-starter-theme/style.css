@@ -10,3 +10,85 @@ License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: ptdevgp
 */
+
+:root {
+
+    /* Tier 1 tokens */
+    --gss-color-red: #96111E;
+    --gss-color-orange: #DE5943;
+    --gss-color-yellow: #EED80A;
+    --gss-color-blue: #5488B0;
+    --gss-color-black: #1E1E1E;
+    --gss-color-white: #ffffff;
+
+    --gss-spacing-1: 4px;
+    --gss-spacing-2: 8px;
+    --gss-spacing-3: 12px;
+    --gss-spacing-4: 16px;
+    --gss-spacing-5: 24px;
+    --gss-spacing-6: 32px;
+    --gss-spacing-7: 48px;
+    --gss-spacing-8: 64px;
+    --gss-spacing-9: 96px;
+    --gss-spacing-10: 128px;
+    --gss-spacing-11: 192px;
+    --gss-spacing-12: 256px;
+    --gss-spacing-13: 384px;
+    --gss-spacing-14: 512px;
+    --gss-spacing-15: 640px;
+    --gss-spacing-16: 768px;
+
+    --gss-font-family-sans-serif: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Adwaita Sans, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif';
+    --gss-font-family-serif: 'Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol';
+    --gss-font-family-mono: 'Menlo, Consolas, Monaco, Adwaita Mono, Liberation Mono, Lucida Console, monospace';
+
+    --gss-font-size-1: 8px;
+    --gss-font-size-2: 12px;
+    --gss-font-size-3: 14px;
+    --gss-font-size-4: 16px;
+    --gss-font-size-5: 18px;
+    --gss-font-size-6: 20px;
+    --gss-font-size-7: 24px;
+    --gss-font-size-8: 30px;
+    --gss-font-size-9: 36px;
+    --gss-font-size-10: 48px;
+    --gss-font-size-11: 60px;
+    --gss-font-size-12: 72px;
+    --gss-font-size-13: 104px;
+
+    --gss-border-radius-1: 8px;
+    --gss-border-radius-2: 16px;
+    --gss-border-radius-full: 999px;
+
+    /* Tier 2 tokens */
+    --gss-typography-body-font-size: var(--gss-font-size-4);
+    --gss-typography-body-line-height: 1.3;
+
+    --gss-typography-h1-font-size: var(--gss-font-size-12);
+    --gss-typography-h1-line-height: 1;
+
+    --gss-typography-display-font-size: var(--gss-font-size-13);
+    --gss-typography-display-line-height: 1;
+
+    --gss-content-side-padding: var(--gss-spacing-9);
+    --gss-wide-side-padding: var(--gss-spacing-7);
+
+    /* Tier 3 tokens */
+
+    /* Buttons */
+    --gss-button-color: var(--gss-color-black);
+    --gss-button-bg-color: var(--gss-color-orange);
+    --gss-button-padding: var(--gss-spacing-4) var(--gss-spacing-6);
+
+    --gss-button-secondary-bg-color: var(--gss-color-white);
+}
+
+.gss-button {
+    color: var(--gss-button-color);
+    background-color: var(--gss-button-bg-color);
+    padding: var(--gss-button-padding);
+}
+
+.gss-button_secondary {
+    background-color: var(--gss-button-secondard-bg-color);
+}
