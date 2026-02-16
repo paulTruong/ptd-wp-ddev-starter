@@ -1,0 +1,104 @@
+#ddev-generated
+# If you remove the ddev-generated line above you
+# are responsible for maintaining this file. DDEV will not then
+# update it, for example if you add `additional_hostnames`, etc.
+
+http:
+  routers:
+    pt-wp-starter-web-80-http:
+      entrypoints:
+        - http-80
+      rule: HostRegexp(`^pt-wp-starter\.ddev\.site$`)
+      
+      service: "pt-wp-starter-web-80"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "pt-wp-starter-redirectHttps"
+    pt-wp-starter-web-8025-http:
+      entrypoints:
+        - http-8025
+      rule: HostRegexp(`^pt-wp-starter\.ddev\.site$`)
+      
+      service: "pt-wp-starter-web-8025"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "pt-wp-starter-redirectHttps"
+    pt-wp-starter-xhgui-80-http:
+      entrypoints:
+        - http-8143
+      rule: HostRegexp(`^pt-wp-starter\.ddev\.site$`)
+      
+      service: "pt-wp-starter-xhgui-80"
+      ruleSyntax: v3
+      tls: false
+      # middlewares:
+      #   - "pt-wp-starter-redirectHttps"
+    
+    
+    
+    pt-wp-starter-web-80-https:
+      entrypoints:
+        - http-443
+      rule: HostRegexp(`^pt-wp-starter\.ddev\.site$`)
+      
+      service: "pt-wp-starter-web-80"
+      ruleSyntax: v3
+      
+      tls: true
+      
+    pt-wp-starter-web-8025-https:
+      entrypoints:
+        - http-8026
+      rule: HostRegexp(`^pt-wp-starter\.ddev\.site$`)
+      
+      service: "pt-wp-starter-web-8025"
+      ruleSyntax: v3
+      
+      tls: true
+      
+    
+    pt-wp-starter-xhgui-80-https:
+      entrypoints:
+        - http-8142
+      rule: HostRegexp(`^pt-wp-starter\.ddev\.site$`)
+      
+      service: "pt-wp-starter-xhgui-80"
+      ruleSyntax: v3
+      
+      tls: true
+      
+    
+
+  middlewares:
+    pt-wp-starter-redirectHttps:
+      redirectScheme:
+        scheme: https
+        permanent: true
+
+  services:
+    pt-wp-starter-web-80:
+      loadbalancer:
+        servers:
+          - url: http://ddev-pt-wp-starter-web:80
+        
+    pt-wp-starter-web-8025:
+      loadbalancer:
+        servers:
+          - url: http://ddev-pt-wp-starter-web:8025
+        
+    
+    
+    pt-wp-starter-xhgui-80:
+      loadbalancer:
+        servers:
+          - url: http://ddev-pt-wp-starter-xhgui:80
+        
+    
+    
+
+tls:
+  certificates:
+    - certFile: /mnt/ddev-global-cache/traefik/certs/pt-wp-starter.crt
+      keyFile: /mnt/ddev-global-cache/traefik/certs/pt-wp-starter.key

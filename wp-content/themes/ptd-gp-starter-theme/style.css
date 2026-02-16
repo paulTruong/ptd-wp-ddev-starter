@@ -11,6 +11,104 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: ptdevgp
 */
 
+/* Cartridge Font Family */
+@font-face {
+    font-family: 'Cartridge';
+    src: url('assets/fonts/Cartridge-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cartridge Soft';
+    src: url('assets/fonts/Cartridge-LightSoft.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cartridge';
+    src: url('assets/fonts/Cartridge-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cartridge Soft';
+    src: url('assets/fonts/Cartridge-RegularSoft.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cartridge';
+    src: url('assets/fonts/Cartridge-Semibold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cartridge Soft';
+    src: url('assets/fonts/Cartridge-SemiboldSoft.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cartridge';
+    src: url('assets/fonts/Cartridge-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cartridge Soft';
+    src: url('assets/fonts/Cartridge-BoldSoft.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cartridge';
+    src: url('assets/fonts/Cartridge-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Cartridge';
+    src: url('assets/fonts/Cartridge-BlackSoft.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Source Serif 4 Font Family */
+@font-face {
+    font-family: 'Source Serif 4';
+    src: url('assets/fonts/SourceSerif4-VariableFont_opsz,wght.ttf') format('truetype');
+    font-weight: 200 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Source Serif 4';
+    src: url('assets/fonts/SourceSerif4-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+    font-weight: 200 900;
+    font-style: italic;
+    font-display: swap;
+}
+
 :root {
 
     /* Tier 1 tokens */
@@ -38,9 +136,8 @@ Text Domain: ptdevgp
     --gss-spacing-15: 640px;
     --gss-spacing-16: 768px;
 
-    --gss-font-family-sans-serif: '-apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Adwaita Sans, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif';
-    --gss-font-family-serif: 'Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol';
-    --gss-font-family-mono: 'Menlo, Consolas, Monaco, Adwaita Mono, Liberation Mono, Lucida Console, monospace';
+    --gss-font-family-cartridge: Cartridge, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Adwaita Sans, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif;
+    --gss-font-family-source-serif: Source Serif 4, Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 
     --gss-font-size-1: 8px;
     --gss-font-size-2: 12px;
@@ -54,33 +151,78 @@ Text Domain: ptdevgp
     --gss-font-size-10: 48px;
     --gss-font-size-11: 60px;
     --gss-font-size-12: 72px;
-    --gss-font-size-13: 104px;
+    --gss-font-size-13: 96px;
+    --gss-font-size-14: 104px;
+
 
     --gss-border-radius-1: 8px;
     --gss-border-radius-2: 16px;
     --gss-border-radius-full: 999px;
 
     /* Tier 2 tokens */
-    --gss-typography-body-font-size: var(--gss-font-size-4);
+
+    --gss-typography-body-font-family: var(--gss-font-family-source-serif);
+    --gss-typography-body-font-size: var(--gss-font-size-6);
     --gss-typography-body-line-height: 1.3;
 
-    --gss-typography-h1-font-size: var(--gss-font-size-12);
+    --gss-typography-h1-font-family: var(--gss-font-family-cartridge);
+    --gss-typography-h1-font-size: var(--gss-font-size-13);
     --gss-typography-h1-line-height: 1;
+
+    --gss-typography-h2-font-family: var(--gss-font-family-cartridge);
+    --gss-typography-h2-font-size: var(--gss-font-size-12);
+    --gss-typography-h2-line-height: 1;
 
     --gss-typography-display-font-size: var(--gss-font-size-13);
     --gss-typography-display-line-height: 1;
 
+    --gss-side-padding: var(--gss-spacing-6);
     --gss-content-side-padding: var(--gss-spacing-9);
     --gss-wide-side-padding: var(--gss-spacing-7);
 
     /* Tier 3 tokens */
 
-    /* Buttons */
-    --gss-button-color: var(--gss-color-black);
-    --gss-button-bg-color: var(--gss-color-orange);
-    --gss-button-padding: var(--gss-spacing-4) var(--gss-spacing-6);
+    /* header */
+    --gss-site-header-padding-vertical: var(--gss-spacing-6);
+    --gss-site-header-padding-left: var(--gss-side-padding);
+    --gss-site-header-padding-right: var(--gss-side-padding);
 
+    /* Sections */
+    --gss-section-padding-vertical: var(--gss-spacing-10);
+    --gss-section-padding-horizontal: var(--gss-side-padding);
+
+    /* Buttons */
+    --gss-button-color: var(--gss-color-white);
+    --gss-button-bg-color: var(--gss-color-orange);
+    --gss-button-hover-bg-color: var(--gss-color-black);
+    --gss-button-padding-vertical: var(--gss-spacing-4);
+    --gss-button-padding-horizontal: var(--gss-spacing-6);
+
+    --gss-button-secondary-color: var(--gss-color-black);
     --gss-button-secondary-bg-color: var(--gss-color-white);
+
+    /* Menu Toggle */
+    --gss-menu-toggle-padding: var(--gss-spacing-2);
+}
+
+/* GP default breakpoints  */
+@media (max-width: 768px) {
+
+    /* CSS in here for mobile only */
+    :root {
+        --gss-side-padding: var(--gss-spacing-5);
+        --gss-site-header-padding-vertical: calc(var(--gss-spacing-4) - var(--gss-menu-toggle-padding));
+        --gss-site-header-menu-toggle-padding-right: calc(var(--gss-site-header-padding-right) - var(--gss-menu-toggle-padding));
+
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* CSS in here for tablet only */
+}
+
+@media (min-width: 1025px) {
+    /* CSS in here for desktop only */
 }
 
 .gss-button {

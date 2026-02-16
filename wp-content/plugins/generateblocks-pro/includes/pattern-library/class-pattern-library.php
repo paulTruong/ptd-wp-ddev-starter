@@ -282,6 +282,11 @@ if ( class_exists( 'GenerateBlocks_Libraries' ) ) :
 				$styles[]  = GENERATEBLOCKS_PRO_DIR_URL . 'dist/blocks/tabs/tabs.css';
 			}
 
+			if ( strpos( $preview, 'gb-menu' ) !== false ) {
+				$scripts[] = GENERATEBLOCKS_PRO_DIR_URL . 'dist/classic-menu.js';
+				$styles[]  = GENERATEBLOCKS_PRO_DIR_URL . 'dist/classic-menu-style.css';
+			}
+
 			$blocks = parse_blocks( $post_content );
 			$global_style_selectors = $this->extract_global_style_selectors( $blocks );
 

@@ -1,4 +1,4 @@
-name: pt-wp-starter
+name: good-site-studios
 type: wordpress
 docroot: .
 php_version: "8.2"

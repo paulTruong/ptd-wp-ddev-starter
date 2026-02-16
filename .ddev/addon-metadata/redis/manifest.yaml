@@ -12,5 +12,5 @@ global_files: []
 removal_actions:
     - |
       #ddev-nodisplay
-      #ddev-description:Remove redis settings for Drupal 9+ if applicable
+      -description:Remove redis settings for Drupal 9+ if applicable
       rm -f "${DDEV_APPROOT}/${DDEV_DOCROOT}/sites/default/settings.ddev.redis.php"

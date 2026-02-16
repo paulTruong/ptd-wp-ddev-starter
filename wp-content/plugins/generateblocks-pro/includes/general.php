@@ -75,6 +75,13 @@ function generateblocks_pro_packages_scripts() {
 			);
 		}
 	}
+
+	wp_register_style(
+		'generateblocks-pro-dashboard-table',
+		GENERATEBLOCKS_PRO_DIR_URL . 'dist/dashboard-table.css',
+		[ 'wp-components' ],
+		filemtime( GENERATEBLOCKS_PRO_DIR . 'dist/dashboard-table.css' )
+	);
 }
 
 add_action( 'enqueue_block_editor_assets', 'generateblocks_pro_do_block_editor_assets', 9 );
@@ -175,6 +182,24 @@ function generateblocks_pro_do_block_editor_assets() {
 		GENERATEBLOCKS_PRO_DIR_URL . 'dist/editor.css',
 		array_merge( [ 'wp-edit-blocks' ], generateblocks_pro_get_package_style_deps() ),
 		filemtime( GENERATEBLOCKS_PRO_DIR . 'dist/editor.css' )
+	);
+
+	wp_localize_script(
+		'generateblocks-pro-editor',
+		'generateblocksProEditor',
+		[
+			'hasOverlaysEnabled' => generateblocks_pro_overlays_enabled(),
+		]
+	);
+
+	wp_localize_script(
+		'generateblocks-pro-classic-menu-editor-script',
+		'generateblocksBlockClassicMenu',
+		[
+			'hasMenuSupport' => get_theme_support( 'menus' ),
+			'menuAdminUrl' => admin_url( 'nav-menus.php' ),
+			'navMenus' => wp_get_nav_menus(),
+		]
 	);
 }
 
@@ -512,6 +537,54 @@ function generateblocks_pro_add_block_data( $data, $block ) {
 		$data['tab-item'][] = $block['attrs'] ?? [];
 	}
 
+	if ( 'generateblocks-pro/navigation' === $block_name ) {
+		$data['navigation'][] = $block['attrs'] ?? [];
+	}
+
+	if ( 'generateblocks-pro/classic-menu' === $block_name ) {
+		$data['classic-menu'][] = $block['attrs'] ?? [];
+	}
+
+	if ( 'generateblocks-pro/classic-menu-item' === $block_name ) {
+		$data['classic-menu-item'][] = $block['attrs'] ?? [];
+	}
+
+	if ( 'generateblocks-pro/classic-sub-menu' === $block_name ) {
+		$data['classic-sub-menu'][] = $block['attrs'] ?? [];
+	}
+
+	if ( 'generateblocks-pro/menu-container' === $block_name ) {
+		$data['menu-container'][] = $block['attrs'] ?? [];
+	}
+
+	if ( 'generateblocks-pro/menu-toggle' === $block_name ) {
+		$data['menu-toggle'][] = $block['attrs'] ?? [];
+	}
+
+	if ( 'generateblocks-pro/site-header' === $block_name ) {
+		$data['site-header'][] = $block['attrs'] ?? [];
+	}
+
+	if ( 'generateblocks-pro/carousel' === $block_name ) {
+		$data['carousel'][] = $block['attrs'] ?? [];
+	}
+
+	if ( 'generateblocks-pro/carousel-items' === $block_name ) {
+		$data['carousel-items'][] = $block['attrs'] ?? [];
+	}
+
+	if ( 'generateblocks-pro/carousel-item' === $block_name ) {
+		$data['carousel-item'][] = $block['attrs'] ?? [];
+	}
+
+	if ( 'generateblocks-pro/carousel-pagination' === $block_name ) {
+		$data['carousel-pagination'][] = $block['attrs'] ?? [];
+	}
+
+	if ( 'generateblocks-pro/carousel-control' === $block_name ) {
+		$data['carousel-control'][] = $block['attrs'] ?? [];
+	}
+
 	return $data;
 }
 
@@ -531,6 +604,18 @@ function generateblocks_pro_add_dynamic_css_blocks( $blocks ) {
 	$blocks['tab-menu-item']         = 'GenerateBlocks_Block_Tab_Menu_Item';
 	$blocks['tab-items']             = 'GenerateBlocks_Block_Tab_Items';
 	$blocks['tab-item']              = 'GenerateBlocks_Block_Tab_Item';
+	$blocks['navigation']            = 'GenerateBlocks_Block_Navigation';
+	$blocks['classic-menu']          = 'GenerateBlocks_Block_Classic_Menu';
+	$blocks['classic-menu-item']     = 'GenerateBlocks_Block_Classic_Menu_Item';
+	$blocks['classic-sub-menu']      = 'GenerateBlocks_Block_Classic_Sub_Menu';
+	$blocks['menu-container']        = 'GenerateBlocks_Block_Menu_Container';
+	$blocks['menu-toggle']           = 'GenerateBlocks_Block_Menu_Toggle';
+	$blocks['site-header']           = 'GenerateBlocks_Block_Site_Header';
+	$blocks['carousel']             = 'GenerateBlocks_Block_Carousel';
+	$blocks['carousel-items']       = 'GenerateBlocks_Block_Carousel_Items';
+	$blocks['carousel-item']        = 'GenerateBlocks_Block_Carousel_Item';
+	$blocks['carousel-pagination']  = 'GenerateBlocks_Block_Carousel_Pagination';
+	$blocks['carousel-control']     = 'GenerateBlocks_Block_Carousel_Control';
 
 	return $blocks;
 }
@@ -582,9 +667,113 @@ function generateblocks_pro_set_global_styles_permission() {
 	wp_register_script( 'generateblocks-global-styles-permissions', '', [], '1.0', false );
 	wp_enqueue_script( 'generateblocks-global-styles-permissions' );
 	$script = sprintf(
-		'const gbGlobalStylePermissions = %s;
+		'var gbGlobalStylePermissions = %s;
 		Object.freeze( gbGlobalStylePermissions );',
 		$permission_object
 	);
 	wp_add_inline_script( 'generateblocks-global-styles-permissions', $script );
+}
+
+add_action( 'enqueue_block_editor_assets', 'generateblocks_pro_set_conditions_permission', 0 );
+add_action( 'admin_enqueue_scripts', 'generateblocks_pro_set_conditions_permission', 0 );
+/**
+ * Output conditions permissions for use in the editor.
+ *
+ * @since 2.4.0
+ * @return void
+ */
+function generateblocks_pro_set_conditions_permission() {
+	if ( 'admin_enqueue_scripts' === current_filter() ) {
+		$screen = get_current_screen();
+
+		// Load on conditions dashboard and post editor screens.
+		if ( ! $screen || ( 'generateblocks_page_generateblocks-conditions' !== $screen->id && 'post' !== $screen->base ) ) {
+			return;
+		}
+	}
+
+	$permissions = [
+		'canUseConditions' => GenerateBlocks_Pro_Conditions::current_user_can_use_conditions( 'use' ),
+		'canManageConditions' => GenerateBlocks_Pro_Conditions::current_user_can_use_conditions( 'manage' ),
+	];
+
+	$permission_object = wp_json_encode( $permissions );
+	wp_register_script( 'generateblocks-conditions-permissions', '', [], '1.0', false );
+	wp_enqueue_script( 'generateblocks-conditions-permissions' );
+	$script = sprintf(
+		'var gbConditionsPermissions = %s;
+		Object.freeze( gbConditionsPermissions );',
+		$permission_object
+	);
+	wp_add_inline_script( 'generateblocks-conditions-permissions', $script );
+}
+
+add_action( 'enqueue_block_editor_assets', 'generateblocks_pro_set_overlays_permission', 0 );
+add_action( 'admin_enqueue_scripts', 'generateblocks_pro_set_overlays_permission', 0 );
+/**
+ * Output overlays permissions for use in the editor.
+ *
+ * @since 2.4.0
+ * @return void
+ */
+function generateblocks_pro_set_overlays_permission() {
+	if ( 'admin_enqueue_scripts' === current_filter() ) {
+		$screen = get_current_screen();
+
+		// Load on overlays dashboard and post editor screens.
+		if ( ! $screen || ( 'generateblocks_page_generateblocks-overlay-panels' !== $screen->id && 'post' !== $screen->base ) ) {
+			return;
+		}
+	}
+
+	$permissions = [
+		'canUseOverlays' => GenerateBlocks_Pro_Overlays::current_user_can_use_overlays( 'use' ),
+		'canManageOverlays' => GenerateBlocks_Pro_Overlays::current_user_can_use_overlays( 'manage' ),
+	];
+
+	$permission_object = wp_json_encode( $permissions );
+	wp_register_script( 'generateblocks-overlays-permissions', '', [], '1.0', false );
+	wp_enqueue_script( 'generateblocks-overlays-permissions' );
+	$script = sprintf(
+		'var gbOverlaysPermissions = %s;
+		Object.freeze( gbOverlaysPermissions );',
+		$permission_object
+	);
+	wp_add_inline_script( 'generateblocks-overlays-permissions', $script );
+}
+
+add_action( 'init', 'generateblocks_pro_register_menu_support' );
+/**
+ * Register menu support for GenerateBlocks Pro.
+ *
+ * @return void
+ */
+function generateblocks_pro_register_menu_support() {
+	register_setting(
+		'general',
+		'generateblocks_pro_classic_menu_support',
+		array(
+			'type' => 'boolean',
+			'default' => false,
+			'show_in_rest' => true,
+		)
+	);
+}
+
+add_action( 'after_setup_theme', 'generateblocks_pro_add_menu_support' );
+/**
+ * Add menu support for GenerateBlocks Pro.
+ *
+ * @return void
+ */
+function generateblocks_pro_add_menu_support() {
+	if ( get_theme_support( 'menus' ) ) {
+		return;
+	}
+
+	$menu_support = get_option( 'generateblocks_pro_classic_menu_support', false );
+
+	if ( $menu_support ) {
+		add_theme_support( 'menus' );
+	}
 }
