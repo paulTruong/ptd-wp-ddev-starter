@@ -10,30 +10,29 @@ namespace ptdStarter\PostTypes;
 /**
  * Book post type class.
  */
-class BookCPT extends PostType {
+class CaseStudyCPT extends PostType {
 
 	/**
 	 * The name of the post type.
 	 *
 	 * @var string
 	 */
-	public const NAME = 'book';
+	public const NAME = 'case-study';
 
 	/**
 	 * The singular label of the post type.
 	 *
 	 * @var string
 	 */
-	public const SINGULAR_LABEL = 'Book';
+	public const SINGULAR_LABEL = 'Case Study';
 
 	/**
 	 * The plural label of the post type.
 	 *
 	 * @var string
 	 */
-	public const PLURAL_LABEL = 'Books';
+	public const PLURAL_LABEL = 'Case Studies';
 
-	public const BOOK_AUTHOR_NAME_META_KEY = self::META_KEY_PREFIX . self::NAME . '_author_name';
 
 	/**
 	 * The options of the post type.
@@ -44,7 +43,7 @@ class BookCPT extends PostType {
 		'menu_position' => 25,
 		'menu_icon'     => 'dashicons-book',
 		'rewrite'       => [
-			'slug' => 'books',
+			'slug' => 'case-studies',
 		],
 		'supports'      => [
 			'title',
@@ -55,21 +54,6 @@ class BookCPT extends PostType {
 			'revisions',
 			'page-attributes',
 			'excerpt',
-		],
-	];
-
-	/**
-	 * The post meta fields of the post type.
-	 *
-	 * @var array
-	 */
-	protected array $post_meta = [
-		self::BOOK_AUTHOR_NAME_META_KEY => [
-			'show_in_rest'      => true,
-			'single'            => true,
-			'description'       => 'Author Name.',
-			'type'              => 'string',
-			'sanitize_callback' => 'sanitize_text_field',
 		],
 	];
 

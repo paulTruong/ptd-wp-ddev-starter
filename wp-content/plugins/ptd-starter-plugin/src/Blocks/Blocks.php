@@ -13,8 +13,7 @@ namespace ptdStarter\Blocks;
 class Blocks
 {
     public static array $blocks = [
-        'dynamic-example',
-        'static-example',
+
     ];
 
     public function __construct()

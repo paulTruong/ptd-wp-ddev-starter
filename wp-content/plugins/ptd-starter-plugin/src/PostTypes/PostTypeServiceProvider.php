@@ -9,7 +9,7 @@
 
 namespace ptdStarter\PostTypes;
 
-use ptdStarter\PostTypes\ExampleCPT;
+use ptdStarter\PostTypes\CaseStudyCPT;
 /**
  * PostTypeServiceProvider class.
  */
@@ -22,7 +22,7 @@ class PostTypeServiceProvider
 	 * @var array
 	 */
 	public static array $post_types = [
-		ExampleCPT::class,
+		CaseStudyCPT::class,
 	];
 
 	/**

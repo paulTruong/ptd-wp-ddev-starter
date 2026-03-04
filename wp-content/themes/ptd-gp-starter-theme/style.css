@@ -203,6 +203,9 @@ Text Domain: ptdevgp
 
     /* Menu Toggle */
     --gss-menu-toggle-padding: var(--gss-spacing-2);
+
+    /* Case Study */
+    --gss-case-study-header-padding-top: var(--gss-spacing-6);
 }
 
 /* GP default breakpoints  */

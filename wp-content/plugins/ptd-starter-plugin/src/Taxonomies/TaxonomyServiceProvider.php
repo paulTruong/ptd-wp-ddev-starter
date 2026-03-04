@@ -19,7 +19,7 @@ class TaxonomyServiceProvider {
 	 * @var array
 	 */
 	public static array $taxonomies = [
-		ExampleCPTCategory::class,
+		// ExampleCPTCategory::class,
 	];
 
 	/**
